@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ServiceService } from 'src/service';
 import { StudentDATA } from './CrudAPI.model';
 
@@ -9,20 +10,20 @@ import { StudentDATA } from './CrudAPI.model';
 })
 export class AppComponent {
   dataStudentDetails: any;
-  dataStudentDetailsByID: any;
   showModal: boolean = false;
   showEditModal: boolean = false;
+
+  AddData = new FormGroup({
+    StudentId: new FormControl(0),
+    StudentName: new FormControl("", [Validators.required]),
+    StudentClass: new FormControl("", [Validators.required]),
+    StudentGender: new FormControl("", [Validators.required]),
+    StudentNo: new FormControl("", [Validators.required]),
+    StudentMark: new FormControl("", [Validators.required])
+  })
+
   ngOnInit() {
     this.getdata();
-  }
-
-  show() {
-    this.showModal = true;
-  }
-
-  hide() {
-    this.showModal = false;
-    this.showEditModal=false;
   }
 
   getdata() {
@@ -31,9 +32,17 @@ export class AppComponent {
     });
   }
 
+  SaveData() {
+    debugger
+    this.ServiceService.AddStudentDetails(this.AddData.value).subscribe((data: any) => {
+      this.dataStudentDetails = data;
+      this.getdata();
+    });
+  }
+
   EditData(id: number) {
     this.ServiceService.GetStudentDetailsByID(id).subscribe(data => {
-      this.dataStudentDetailsByID = data;
+      this.dataStudentDetails = data;
       this.showEditModal = true;
     })
   }
@@ -43,6 +52,15 @@ export class AppComponent {
       this.dataStudentDetails = data;
       this.getdata();
     });
+  }
+
+  show() {
+    this.showModal = true;
+  }
+
+  hide() {
+    this.showModal = false;
+    this.showEditModal = false;
   }
 
   constructor(private ServiceService: ServiceService) { }
