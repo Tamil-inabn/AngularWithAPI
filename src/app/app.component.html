@@ -1,0 +1,122 @@
+<div style="position: absolute;top: 87px;">
+    <button type="button" class="btn btn-outline-success" (click)="show()">Add New Records</button>
+</div>
+
+
+
+<div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Login</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>studentName</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentClass</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentGender</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentNo</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentMark</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="hide()">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="position: absolute;top: 132px;left: 55px;">
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>studentId</th>
+                <th>studentName</th>
+                <th>studentClass</th>
+                <th>studentGender</th>
+                <th>studentNo</th>
+                <th>studentMark</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor='let f of dataStudentDetails'>
+                <td>{{f.studentId}}</td>
+                <td>{{f.studentName}}</td>
+                <td>{{f.studentClass}}</td>
+                <td>{{f.studentGender}}</td>
+                <td>{{f.studentNo}}</td>
+                <td>{{f.studentMark}}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-info" (click)="EditData(f.studentId)">Edit</button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-danger"
+                        (click)="deleteData(f.studentId)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div [style.display]="showEditModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
+    aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Student Information</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label>studentId</label>
+                        <input type="text" disabled class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentName</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentClass</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentGender</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentNo</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>studentMark</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-dark" data-dismiss="modal" (click)="hide()">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
