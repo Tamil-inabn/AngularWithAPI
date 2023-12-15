@@ -9,12 +9,13 @@ import { StudentDATA } from './CrudAPI.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  dataStudentDetails: any;
+  dataStudentDetails:any;
+  dataStudentDetail:any=[];
   showModal: boolean = false;
   showEditModal: boolean = false;
 
   AddData = new FormGroup({
-    StudentId: new FormControl(0),
+    StudentId: new FormControl(),
     StudentName: new FormControl("", [Validators.required]),
     StudentClass: new FormControl("", [Validators.required]),
     StudentGender: new FormControl("", [Validators.required]),
@@ -28,40 +29,65 @@ export class AppComponent {
 
   getdata() {
     this.ServiceService.GetStudentDetails().subscribe((data: any) => {
-      this.dataStudentDetails = data;
+      this.dataStudentDetail = data;
     });
   }
 
   SaveData() {
-    debugger
     this.ServiceService.AddStudentDetails(this.AddData.value).subscribe((data: any) => {
       this.dataStudentDetails = data;
       this.getdata();
+      this.showModal = false;
     });
   }
 
   EditData(id: number) {
     this.ServiceService.GetStudentDetailsByID(id).subscribe(data => {
       this.dataStudentDetails = data;
+      this.AddData.controls['StudentName'].setValue(this.dataStudentDetails.studentName)
+      this.AddData.controls['StudentId'].setValue(this.dataStudentDetails.studentId )
+      this.AddData.controls['StudentClass'].setValue(this.dataStudentDetails.studentClass)
+      this.AddData.controls['StudentGender'].setValue(this.dataStudentDetails.studentGender)
+      this.AddData.controls['StudentNo'].setValue(this.dataStudentDetails.studentNo)
+      this.AddData.controls['StudentMark'].setValue(this.dataStudentDetails.studentMark)
       this.showEditModal = true;
     })
   }
 
-  deleteData(id: any) {
-    this.ServiceService.DeleteeStudentDetails(id).subscribe(data => {
-      this.dataStudentDetails = data;
+  UpdateData(){
+    debugger
+    this.ServiceService.EditStudentData(
+      this.AddData.value).subscribe((data:any)=>{
+      this.dataStudentDetails=data;
+      this.showEditModal= false;
       this.getdata();
     });
   }
 
+  deleteData(id: any) {
+    this.ServiceService.DeleteeStudentDetails(id).subscribe(data => {
+      this.dataStudentDetails = data;      
+    });
+    this.getdata();
+  }
+
   show() {
     this.showModal = true;
+    this.AddData = new FormGroup({
+      StudentId: new FormControl(),
+      StudentName: new FormControl("", [Validators.required]),
+      StudentClass: new FormControl("", [Validators.required]),
+      StudentGender: new FormControl("", [Validators.required]),
+      StudentNo: new FormControl("", [Validators.required]),
+      StudentMark: new FormControl("", [Validators.required])
+    })
   }
 
   hide() {
     this.showModal = false;
-    this.showEditModal = false;
+    this.showEditModal = false;   
   }
+
 
   constructor(private ServiceService: ServiceService) { }
 }
