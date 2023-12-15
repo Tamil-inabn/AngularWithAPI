@@ -22,8 +22,8 @@ export class ServiceService {
     return this.http.post(`${this.apiUrl}/AddStudentDetails`, formData);
   }
 
-  EditStudentData(id: any, formData: any) {
-    return this.http.put(`${this.apiUrl}/EditStudentData?id=` + id, formData)
+  EditStudentData(formData: any) {
+    return this.http.put(`${this.apiUrl}/UpdateStudentDetails`, formData)
   }
 
   DeleteeStudentDetails(id: any) {
