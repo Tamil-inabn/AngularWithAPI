@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ServiceService {
 
   readonly apiUrl = 'https://localhost:7288/api/Values';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private toastrService: ToastrService) { }
 
   GetStudentDetails() {
     return this.http.get(`${this.apiUrl}/GetStudentDetails`);
@@ -28,5 +29,14 @@ export class ServiceService {
 
   DeleteeStudentDetails(id: any) {
     return this.http.delete(`${this.apiUrl}/DeleteeStudentDetails?id=` + id);
+  }
+
+  // 
+  showSuccess() {
+    this.toastrService.success('Students Details Add Successfully!', 'Title Success!');
+  }
+  
+  showError() {
+    this.toastrService.error('Students Details Delete Successfully!', 'Title Error!');
   }
 }
