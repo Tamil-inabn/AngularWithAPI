@@ -3,7 +3,6 @@
 </div>
 
 
-
 <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -12,28 +11,29 @@
                 <h4 class="modal-title" id="myModalLabel">Login</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="AddData">
+                <form [formGroup]="AddData" (ngSubmit)="SaveData()">
                     <div class="form-group">
-                        <label>studentName</label>
-                        <input type="text" formControlName="StudentName" class="form-control" />
+                        <label>student Name</label>
+                        <input type="text" formControlName="StudentName" 
+                        class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentClass</label>
+                        <label>student Class</label>
                         <input type="text" formControlName="StudentClass" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentGender</label>
+                        <label>student Gender</label>
                         <input type="text" formControlName="StudentGender" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentNo</label>
+                        <label>student No</label>
                         <input type="text" formControlName="StudentNo" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentMark</label>
+                        <label>student Mark</label>
                         <input type="text" formControlName="StudentMark" class="form-control" />
                     </div><br>
-                    <button type="submit" class="btn btn-primary" (click)="SaveData()">Submit</button>
+                    <button type="submit" class="btn btn-outline-primary">Submit</button>
                 </form>
             </div>
             <div class="modal-footer">
@@ -48,12 +48,12 @@
     <table class="table table-hover">
         <thead class="thead-dark">
             <tr>
-                <th>studentId</th>
-                <th>studentName</th>
-                <th>studentClass</th>
-                <th>studentGender</th>
-                <th>studentNo</th>
-                <th>studentMark</th>
+                <th>student Id</th>
+                <th>student Name</th>
+                <th>student Class</th>
+                <th>student Gender</th>
+                <th>student No</th>
+                <th>student Mark</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -87,33 +87,33 @@
                 <h4 class="modal-title" id="myModalLabel">Student Information</h4>
             </div>
             <div class="modal-body">
-                <form [formGroup]="AddData">
-                    <div class="form-group">
-                        <label>studentId</label>
+                <form [formGroup]="AddData" (ngSubmit)="UpdateData()">
+                    <div class="form-group" >
+                        <label>student Id</label>
                         <input type="text" style="background-color:#e7e2e2 ;" [readonly]="true"
                             formControlName="StudentId" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentName</label>
+                        <label>student Name</label>
                         <input type="text" formControlName="StudentName" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentClass</label>
+                        <label>student Class</label>
                         <input type="text" formControlName="StudentClass" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentGender</label>
+                        <label>student Gender</label>
                         <input type="text" formControlName="StudentGender" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentNo</label>
+                        <label>student No</label>
                         <input type="text" formControlName="StudentNo" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>studentMark</label>
+                        <label>student Mark</label>
                         <input type="text" formControlName="StudentMark" class="form-control" />
                     </div><br>
-                    <button type="submit" class="btn btn-primary" (click)="UpdateData()">Update</button>
+                    <button type="submit" class="btn btn-outline-primary">Update</button>
                 </form>
             </div>
             <div class="modal-footer">
