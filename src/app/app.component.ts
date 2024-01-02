@@ -13,8 +13,7 @@ export class AppComponent {
   dataStudentDetail: any[] = [];
   showModal: boolean = false;
   showEditModal: boolean = false;
-  studenName:string="";
-  filteredDataToSearch:any[]=[];
+  filteredDataToSearch: any[] = [];
 
   AddData = new FormGroup({
     StudentId: new FormControl(0),
@@ -32,13 +31,16 @@ export class AppComponent {
   getdata() {
     this.ServiceService.GetStudentDetails().subscribe((data: any) => {
       this.dataStudentDetail = data;
+      this.filteredDataToSearch =data;
     });
   }
 
-  DetailsGetByID() { 
-    this.filteredDataToSearch = this.dataStudentDetail.filter((m) => m.studentName.includes(this.studenName));
-    console.log(this.filteredDataToSearch);
-    this.dataStudentDetail=this.filteredDataToSearch;
+  DetailsGetByID(data: any) {
+    if (data.target.value != null) {
+      this.dataStudentDetail = this.filteredDataToSearch.filter((m) => m.studentName.includes(data.target.value));
+    }else{
+    this.dataStudentDetail = this.filteredDataToSearch;
+  }
   }
 
   SaveData() {

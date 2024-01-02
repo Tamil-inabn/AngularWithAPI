@@ -4,7 +4,7 @@
 
 <div style="width: 200px;position: absolute;right: 100px;top: 60px;">  
     <span><b>Search Records</b></span>
-    <input type="search" class="form-control" [(ngModel)]="studenName" (keydown)="DetailsGetByID()">   
+    <input type="search" class="form-control"  (input)="DetailsGetByID($event)">   
 </div>
 
 
