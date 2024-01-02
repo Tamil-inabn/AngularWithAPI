@@ -35,7 +35,11 @@ export class ServiceService {
   showSuccess() {
     this.toastrService.success('Students Details Add Successfully!', 'Title Success!');
   }
-  
+
+  showUpdate() {
+    this, this.toastrService.info('Student Details Updated Successfully!', 'Title Info!');
+  }
+
   showError() {
     this.toastrService.error('Students Details Delete Successfully!', 'Title Error!');
   }

@@ -2,6 +2,11 @@
     <button type="button" class="btn btn-outline-success" (click)="show()">Add New Records</button>
 </div>
 
+<div style="width: 200px;position: absolute;right: 100px;top: 60px;">  
+    <span><b>Search Records</b></span>
+    <input type="search" class="form-control" [(ngModel)]="studenName" (keydown)="DetailsGetByID()">   
+</div>
+
 
 <div [style.display]="showModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
@@ -14,24 +19,45 @@
                 <form [formGroup]="AddData" (ngSubmit)="SaveData()">
                     <div class="form-group">
                         <label>student Name</label>
-                        <input type="text" formControlName="StudentName" 
-                        class="form-control" />
+                        <input type="text" formControlName="StudentName" class="form-control" />
+                        <span *ngIf="AddData.controls['StudentName'].invalid && AddData.controls['StudentName'].touched"
+                            class="text-danger">
+                            Name is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student Class</label>
                         <input type="text" formControlName="StudentClass" class="form-control" />
+                        <span
+                            *ngIf="AddData.controls['StudentClass'].invalid && AddData.controls['StudentClass'].touched"
+                            class="text-danger">
+                            Class is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student Gender</label>
                         <input type="text" formControlName="StudentGender" class="form-control" />
+                        <span
+                            *ngIf="AddData.controls['StudentGender'].invalid && AddData.controls['StudentGender'].touched"
+                            class="text-danger">
+                            Gender is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student No</label>
                         <input type="text" formControlName="StudentNo" class="form-control" />
+                        <span *ngIf="AddData.controls['StudentNo'].invalid && AddData.controls['StudentNo'].touched"
+                            class="text-danger">
+                            No is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student Mark</label>
                         <input type="text" formControlName="StudentMark" class="form-control" />
+                        <span *ngIf="AddData.controls['StudentMark'].invalid && AddData.controls['StudentMark'].touched"
+                            class="text-danger">
+                            Mark is required.
+                        </span>
                     </div><br>
                     <button type="submit" class="btn btn-outline-primary">Submit</button>
                 </form>
@@ -67,8 +93,7 @@
                 <td>{{f.studentNo}}</td>
                 <td>{{f.studentMark}}</td>
                 <td>
-                    <button type="button" class="btn btn-outline-info" 
-                        (click)="EditData(f.studentId)">Edit</button>
+                    <button type="button" class="btn btn-outline-info" (click)="EditData(f.studentId)">Edit</button>
                 </td>
                 <td>
                     <button type="button" class="btn btn-outline-danger"
@@ -88,7 +113,7 @@
             </div>
             <div class="modal-body">
                 <form [formGroup]="AddData" (ngSubmit)="UpdateData()">
-                    <div class="form-group" >
+                    <div class="form-group">
                         <label>student Id</label>
                         <input type="text" style="background-color:#e7e2e2 ;" [readonly]="true"
                             formControlName="StudentId" class="form-control" />
@@ -96,22 +121,44 @@
                     <div class="form-group">
                         <label>student Name</label>
                         <input type="text" formControlName="StudentName" class="form-control" />
+                        <span *ngIf="AddData.controls['StudentName'].invalid && AddData.controls['StudentName'].touched"
+                            class="text-danger">
+                            Name is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student Class</label>
                         <input type="text" formControlName="StudentClass" class="form-control" />
+                        <span
+                            *ngIf="AddData.controls['StudentClass'].invalid && AddData.controls['StudentClass'].touched"
+                            class="text-danger">
+                            Class is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student Gender</label>
                         <input type="text" formControlName="StudentGender" class="form-control" />
+                        <span
+                            *ngIf="AddData.controls['StudentGender'].invalid && AddData.controls['StudentGender'].touched"
+                            class="text-danger">
+                            Gender is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student No</label>
                         <input type="text" formControlName="StudentNo" class="form-control" />
+                        <span *ngIf="AddData.controls['StudentNo'].invalid && AddData.controls['StudentNo'].touched"
+                            class="text-danger">
+                            No is required.
+                        </span>
                     </div>
                     <div class="form-group">
                         <label>student Mark</label>
                         <input type="text" formControlName="StudentMark" class="form-control" />
+                        <span *ngIf="AddData.controls['StudentMark'].invalid && AddData.controls['StudentMark'].touched"
+                            class="text-danger">
+                            Mark is required.
+                        </span>
                     </div><br>
                     <button type="submit" class="btn btn-outline-primary">Update</button>
                 </form>
