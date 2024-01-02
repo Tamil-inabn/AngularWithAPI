@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ServiceService } from 'src/service';
 import { StudentDATA } from './CrudAPI.model';
 
@@ -10,10 +10,11 @@ import { StudentDATA } from './CrudAPI.model';
 })
 export class AppComponent {
   dataStudentDetails: any;
-  dataStudentDetail: any = [];
+  dataStudentDetail: any[] = [];
   showModal: boolean = false;
   showEditModal: boolean = false;
-  submitted = false;
+  studenName:string="";
+  filteredDataToSearch:any[]=[];
 
   AddData = new FormGroup({
     StudentId: new FormControl(0),
@@ -34,7 +35,17 @@ export class AppComponent {
     });
   }
 
+  DetailsGetByID() { 
+    this.filteredDataToSearch = this.dataStudentDetail.filter((m) => m.studentName.includes(this.studenName));
+    console.log(this.filteredDataToSearch);
+    this.dataStudentDetail=this.filteredDataToSearch;
+  }
+
   SaveData() {
+    if (this.AddData.invalid) {
+      this.AddData.markAllAsTouched();
+      return;
+    }
     this.ServiceService.AddStudentDetails(this.AddData.value).subscribe((data: any) => {
       this.dataStudentDetails = data;
       this.getdata();
@@ -57,10 +68,16 @@ export class AppComponent {
   }
 
   UpdateData() {
+    debugger
+    if (this.AddData.invalid) {
+      this.AddData.markAllAsTouched();
+      return;
+    }
     this.ServiceService.EditStudentData(
       this.AddData.value).subscribe((data: any) => {
         this.dataStudentDetails = data;
         this.showEditModal = false;
+        this.ServiceService.showUpdate();
         this.getdata();
       });
   }
@@ -68,7 +85,7 @@ export class AppComponent {
   deleteData(id: any) {
     this.ServiceService.DeleteeStudentDetails(id).subscribe(data => {
       this.dataStudentDetails = data;
-    this.getdata();
+      this.getdata();
     });
     this.ServiceService.showError();
   }
@@ -89,7 +106,5 @@ export class AppComponent {
     this.showModal = false;
     this.showEditModal = false;
   }
-
-
-  constructor(private ServiceService: ServiceService) { }
+  constructor(private ServiceService: ServiceService, private fb: FormBuilder) { }
 }
