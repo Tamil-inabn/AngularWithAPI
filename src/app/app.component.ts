@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ServiceService } from 'src/service';
-import { StudentDATA } from './CrudAPI.model';
 
 @Component({
   selector: 'app-root',
@@ -32,15 +31,16 @@ export class AppComponent {
     this.ServiceService.GetStudentDetails().subscribe((data: any) => {
       this.dataStudentDetail = data;
       this.filteredDataToSearch =data;
-    });
+    });    
+
   }
 
   DetailsGetByID(data: any) {
     if (data.target.value != null) {
-      this.dataStudentDetail = this.filteredDataToSearch.filter((m) => m.studentName.includes(data.target.value));
-    }else{
+      this.dataStudentDetail = this.filteredDataToSearch.filter((m) => m.studentName.toLowerCase().includes(data.target.value.toLowerCase()));
+      return;
+    }
     this.dataStudentDetail = this.filteredDataToSearch;
-  }
   }
 
   SaveData() {
@@ -70,7 +70,6 @@ export class AppComponent {
   }
 
   UpdateData() {
-    debugger
     if (this.AddData.invalid) {
       this.AddData.markAllAsTouched();
       return;
@@ -108,5 +107,5 @@ export class AppComponent {
     this.showModal = false;
     this.showEditModal = false;
   }
-  constructor(private ServiceService: ServiceService, private fb: FormBuilder) { }
+  constructor(private ServiceService: ServiceService) { }
 }
