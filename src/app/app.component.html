@@ -2,9 +2,9 @@
     <button type="button" class="btn btn-outline-success" (click)="show()">Add New Records</button>
 </div>
 
-<div style="width: 200px;position: absolute;right: 100px;top: 60px;">  
+<div style="width: 200px;position: absolute;right: 100px;top: 60px;">
     <span><b>Search Records</b></span>
-    <input type="search" class="form-control"  (input)="DetailsGetByID($event)">   
+    <input type="search" class="form-control" (input)="DetailsGetByID($event)">
 </div>
 
 
@@ -84,7 +84,7 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody *ngIf="dataStudentDetail.length>0;else nodata">
             <tr *ngFor='let f of dataStudentDetail'>
                 <td>{{f.studentId}}</td>
                 <td>{{f.studentName}}</td>
@@ -103,6 +103,12 @@
         </tbody>
     </table>
 </div>
+
+<ng-template #nodata>
+    <p style="font-family: TimesNewRoman;font-weight: bold;" class="text-danger">
+        No data available
+    </p>
+</ng-template>
 
 <div [style.display]="showEditModal ? 'block' : 'none'" class="modal" id="imagemodal" tabindex="-1" role="dialog"
     aria-labelledby="myModalLabel" aria-hidden="true">
