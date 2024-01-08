@@ -30,13 +30,12 @@ export class AppComponent {
   getdata() {
     this.ServiceService.GetStudentDetails().subscribe((data: any) => {
       this.dataStudentDetail = data;
-      this.filteredDataToSearch =data;
-    });    
-
+      this.filteredDataToSearch = data;
+    });
   }
 
   DetailsGetByID(data: any) {
-    if (data.target.value != null) {
+    if (data.target.value != "") {
       this.dataStudentDetail = this.filteredDataToSearch.filter((m) => m.studentName.toLowerCase().includes(data.target.value.toLowerCase()));
       return;
     }
